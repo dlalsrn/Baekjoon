@@ -1,21 +1,16 @@
 #include <iostream>
 using namespace std;
-int N, cnt = 0;
+int N;
 
-int fibo(int n)
-{
-	if (n == 1 || n == 2)
-	{
-		cnt++;
-		return 1;
-	}
-	else
-		return fibo(n - 1) + fibo(n - 2);
-}
 int main(void)
 {
 	cin >> N;
-	fibo(N);
-	cout << cnt << ' ' << N - 2;
+	int dp[40];
+	dp[1] = dp[2] = 1;
+	
+	for (int i = 2; i <= N; i++)
+		dp[i] = dp[i - 1] + dp[i - 2];
+	cout << dp[N] << ' ' << N - 2;
+
 	return 0;
 }
