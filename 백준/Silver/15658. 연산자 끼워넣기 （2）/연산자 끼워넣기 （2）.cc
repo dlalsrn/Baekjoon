@@ -4,11 +4,10 @@
 using namespace std;
 
 vector <int> value;
-vector <int> op;
-vector <bool> visit_op;
-int N, mx = -1000000000, mn = 1000000000, cnt = 0;
+vector <int> op(4);
+int N, mx = -1000000000, mn = 1000000000;
 
-void back(int ans)
+void back(int ans, int cnt)
 {
 	if (cnt == N)
 	{
@@ -22,29 +21,14 @@ void back(int ans)
 			continue;
 		op[i]--;
 		if (i == 0)
-		{
-			back(ans + value[cnt++]);
-			op[i]++;
-			cnt--;
-		}
+			back(ans + value[cnt], cnt + 1);
 		else if (i == 1)
-		{
-			back(ans - value[cnt++]);
-			op[i]++;
-			cnt--;
-		}
+			back(ans - value[cnt], cnt + 1);
 		else if (i == 2)
-		{
-			back(ans * value[cnt++]);
-			op[i]++;
-			cnt--;
-		}
+			back(ans * value[cnt], cnt + 1);
 		else
-		{
-			back(ans / value[cnt++]);
-			op[i]++;
-			cnt--;
-		}
+			back(ans / value[cnt], cnt + 1);
+		op[i]++;
 	}
 }
 
@@ -56,7 +40,6 @@ int main(void)
 	cin >> N;
 
 	value = vector<int>(N);
-	op = vector<int>(4);
 
 	for (int i = 0; i < N; i++)
 		cin >> value[i];
@@ -64,8 +47,7 @@ int main(void)
 	for (int i = 0; i < 4; i++)
 		cin >> op[i];
 
-	cnt++;
-	back(value[0]);
+	back(value[0], 1);
 
 	cout << mx << '\n' << mn;
 	return 0;
