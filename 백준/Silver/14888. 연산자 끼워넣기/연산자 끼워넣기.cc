@@ -6,9 +6,9 @@ using namespace std;
 vector <int> value;
 vector <int> op;
 vector <bool> visit_op;
-int N, c, mx = -1000000000, mn = 1000000000, cnt = 0;
+int N, c, mx = -1000000000, mn = 1000000000;
 
-void back(int ans)
+void back(int ans, int cnt)
 {
 	if (cnt == N)
 	{
@@ -22,37 +22,13 @@ void back(int ans)
 			continue;
 		visit_op[i] = true;
 		if (op[i] == 0)
-		{
-			ans += value[cnt];
-			cnt++;
-			back(ans);
-			cnt--;
-			ans -= value[cnt];
-		}
+			back(ans + value[cnt], cnt + 1);
 		else if (op[i] == 1)
-		{
-			ans -= value[cnt];
-			cnt++;
-			back(ans);
-			cnt--;
-			ans += value[cnt];
-		}
+			back(ans - value[cnt], cnt + 1);
 		else if (op[i] == 2)
-		{
-			ans *= value[cnt];
-			cnt++;
-			back(ans);
-			cnt--;
-			ans /= value[cnt];
-		}
+			back(ans * value[cnt], cnt + 1);
 		else
-		{
-			ans /= value[cnt];
-			cnt++;
-			back(ans);
-			cnt--;
-			ans *= value[cnt];
-		}
+			back(ans / value[cnt], cnt + 1);
 		visit_op[i] = false;
 	}
 }
@@ -77,8 +53,7 @@ int main(void)
 			op.push_back(i);
 	}
 
-	cnt++;
-	back(value[0]);
+	back(value[0], 1);
 
 	cout << mx << '\n' << mn;
 	return 0;
