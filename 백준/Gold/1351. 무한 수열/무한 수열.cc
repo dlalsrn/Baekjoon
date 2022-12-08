@@ -8,17 +8,13 @@ ll N, P, Q;
 
 ll sum(ll n)
 {
-	if (n == 0)
-		return 1;
-	else if (m[n])
-		return m[n];
-	m[n] = sum(n / P) + sum(n / Q);
-	return m[n];
+	return (m[n] ? m[n] : m[n] = sum(n / P) + sum(n / Q));
 }
 
 int main(void)
 {
 	cin >> N >> P >> Q;
+	m[0] = 1;
 	cout << sum(N);
 	return 0;
 }
