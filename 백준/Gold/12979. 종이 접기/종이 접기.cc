@@ -6,7 +6,7 @@ using namespace std;
 
 typedef long long ll;
 vector <bool> sosu;
-vector <pair<ll, ll>> fold; // 접을 수 있는 가지 수
+vector <pair<ll, ll>> fold;
 vector <ll> width;
 vector <ll> height;
 
@@ -27,10 +27,8 @@ int main(void)
 			fold.push_back(make_pair(1, 1));
 
 		for (int i = 1; i * 2 <= A; i++)
-		{
 			if (A % i == 0)
 				fold.push_back(make_pair(i, A / i));
-		}
 
 		while (W != 1)
 		{
@@ -47,15 +45,6 @@ int main(void)
 		sort(width.begin(), width.end());
 		sort(height.begin(), height.end());
 
-		/*
-		while (1)
-		{
-			int a, b;
-			cin >> a >> b;
-			cout << width.end() - lower_bound(width.begin(), width.end(), a + 1) + 1 << ' ';
-			cout << height.end() - lower_bound(height.begin(), height.end(), b + 1) + 1 << '\n';
-		}
-		*/
 		for (int i = 0; i < fold.size(); i++)
 		{
 			if (ori_W >= fold[i].first && ori_H >= fold[i].second)
@@ -65,7 +54,6 @@ int main(void)
 					w = width.end() - lower_bound(width.begin(), width.end(), fold[i].first + 1) + 1;
 				if (fold[i].second != ori_H)
 					h = height.end() - lower_bound(height.begin(), height.end(), fold[i].second + 1) + 1;
-				//cout << fold[i].first << ' ' << fold[i].second << ' ' << w << ' ' << h << '\n';
 				mn = min(mn, w + h);
 			}
 		}
@@ -79,7 +67,6 @@ int main(void)
 					w = width.end() - lower_bound(width.begin(), width.end(), fold[i].second + 1) + 1;
 				if (fold[i].first != ori_H)
 					h = height.end() - lower_bound(height.begin(), height.end(), fold[i].first + 1) + 1;
-				//cout << fold[i].first << ' ' << fold[i].second << ' ' << w << ' ' << h << '\n';
 				mn = min(mn, w + h);
 			}
 		}
