@@ -4,11 +4,11 @@
 
 ### 성능 요약
 
-메모리: 34944 KB, 시간: 116 ms
+메모리: 36648 KB, 시간: 92 ms
 
 ### 분류
 
-임의 정밀도 / 큰 수 연산(arbitrary_precision), 이분 탐색(binary_search), 수학(math), 수치해석(numerical_analysis)
+수학, 이분 탐색, 임의 정밀도 / 큰 수 연산, 수치해석
 
 ### 문제 설명
 
