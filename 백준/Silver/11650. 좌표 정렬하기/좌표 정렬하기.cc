@@ -1,21 +1,25 @@
 #include <iostream>
-#include <queue>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int main(void)
 {
-	int N, x, y;
-	priority_queue <pair<int, int>, vector<pair<int,int>>, greater<pair<int,int>>> q;
+	vector<pair<int, int>> v;
+	int N;
 	cin >> N;
+
 	for (int i = 0; i < N; i++)
 	{
-		cin >> x >> y;
-		q.push({ x, y });
+		int a, b;
+		cin >> a >> b;
+		v.push_back(make_pair(a, b));
 	}
+
+	sort(v.begin(), v.end());
+
 	for (int i = 0; i < N; i++)
-	{
-		cout << q.top().first << ' ' << q.top().second << '\n';
-		q.pop();
-	}
+		cout << v[i].first << ' ' << v[i].second << '\n';
+
 	return 0;
-}	
+}
