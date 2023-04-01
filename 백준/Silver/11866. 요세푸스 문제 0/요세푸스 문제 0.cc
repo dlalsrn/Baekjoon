@@ -2,30 +2,34 @@
 #include <queue>
 using namespace std;
 
+queue <int> q;
+int N, K, t;
+
 int main(void)
 {
-	queue <int> q;
-	int N, K, num;
 	cin >> N >> K;
-	for (int i = 0; i < N; i++)
-		q.push(i + 1);
+
+	for (int i = 1; i <= N; i++)
+		q.push(i);
 
 	cout << "<";
+
 	for (int i = 0; i < N; i++)
 	{
-		for (int j = 0; j < K-1; j++)
+		for (int j = 0; j < K - 1; j++)
 		{
-			num = q.front();
+			t = q.front();
 			q.pop();
-			q.push(num);
+			q.push(t);
 		}
-		num = q.front();
+
+		cout << q.front();
 		q.pop();
-		cout << num;
-		if (i == N - 1)
-			break;
-		cout << ", ";
+
+		if (i != N - 1)
+			cout << ", ";
 	}
+
 	cout << ">";
 	return 0;
 }
