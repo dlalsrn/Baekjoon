@@ -1,28 +1,31 @@
 #include <iostream>
-#include <cstdio>
 #include <stack>
 using namespace std;
 
+int K, x, sum = 0;
+stack <int> s;
+
 int main(void)
 {
-    int k, sum = 0;
-    stack <int> st;
-    scanf("%d", &k);
-    for (int i = 0; i < k; i++)
+    cin >> K;
+
+    for (int i = 0; i < K; i++)
     {
-        int a;
-        scanf("%d", &a);
-        if (a != 0)
+        cin >> x;
+
+        if (x)
         {
-            st.push(a);
-            sum += a;
+            s.push(x);
+            sum += x;
         }
         else
         {
-            sum -= st.top();
-            st.pop();
+            sum -= s.top();
+            s.pop();
         }
     }
-    printf("%d", sum);
+
+    cout << sum;
+
     return 0;
 }
