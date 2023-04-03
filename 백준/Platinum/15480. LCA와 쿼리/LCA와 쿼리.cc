@@ -93,28 +93,6 @@ int main(void)
 			cout << lca_v << '\n';
 		else
 			cout << lca_root << '\n';
-		/*
-		if (D[root] < D[u] && D[root] < D[v])
-			cout << LCA(u, v) << '\n';
-		else if (D[root] > D[u] && D[root] > D[v])
-		{
-			int lca_u = LCA(root, u);
-			int lca_v = LCA(root, v);
-			cout << (D[lca_u] > D[lca_v] ? lca_u : lca_v) << '\n';
-		}
-		else
-		{
-			int lca_u = LCA(root, u);
-			int lca_v = LCA(root, v);
-			int lca_root = LCA(u, v);
-			if (D[lca_u] > D[lca_v] && D[lca_u] > D[lca_root])
-				cout << lca_u << '\n';
-			else if (D[lca_v] > D[lca_u] && D[lca_v] > D[lca_root])
-				cout << lca_v << '\n';
-			else
-				cout << lca_root << '\n';
-		}
-		*/
 	}
 
 	return 0;
