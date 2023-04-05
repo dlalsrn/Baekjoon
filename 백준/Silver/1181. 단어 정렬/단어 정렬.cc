@@ -1,31 +1,36 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
 
-int main(void)
+bool compare(string a, string b)
 {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	vector <pair<int, string>> v;
-	string voca;
-	int N;
-	cin >> N;
-	for (int i = 0; i < N; i++)
-	{
-		cin >> voca;
-		v.push_back({ voca.length(), voca });
-	}
+    if (a.size() == b.size())
+    {
+        return a < b;
+    }
+    return a.size() < b.size();
 
-	sort(v.begin(), v.end());
-	cout << v[0].second << endl;
-	for (int i = 1; i < v.size(); i++)
-	{
-		if (v[i-1].second != v[i].second)
-			cout << v[i].second << endl;
-	}
+}
+int main() {
 
-	return 0;
+
+    int i, N;
+    cin >> N;
+    string temp;
+    vector<string> ss;
+    for (i = 0; i < N; i++)
+    {
+        cin >> temp;
+        ss.push_back(temp);
+    }
+
+    sort(ss.begin(), ss.end(), compare);
+
+    ss.erase(unique(ss.begin(), ss.end()), ss.end());
+    for (i = 0; i < ss.size(); i++)
+    {
+        cout << ss[i] << "\n";
+    }
+    return 0;
 }
