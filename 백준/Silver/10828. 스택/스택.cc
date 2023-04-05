@@ -1,10 +1,11 @@
 #include <iostream>
-#include <cstdio>
 #include <stack>
 using namespace std;
 
 int main(void)
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
     int n;
     stack <int> st;
     cin >> n;
@@ -12,34 +13,33 @@ int main(void)
     {
         string a;
         cin >> a;
-        if (a[0] == 'p')
+        if (a == "push")
         {
-            if (a[1] == 'u')
+            int x;
+            cin >> x;
+            st.push(x);
+        }
+        else if (a == "pop")
+        {
+            if (st.empty())
+                cout << -1 << '\n';
+            else
             {
-                int k;
-                cin >> k;
-                st.push(k);
-            }
-            else if (a[1] == 'o')
-            {
-                if (st.empty())
-                    cout << -1 << "\n";
-                else
-                {
-                    cout << st.top() << "\n";
-                    st.pop();
-                }
+                cout << st.top() << '\n';
+                st.pop();
             }
         }
-        else if (a[0] == 's')
-            cout << st.size() << "\n";
-        else if (a[0] == 'e')
-            cout << st.empty() << "\n";
-        else if (a[0] == 't')
+        else if (a == "size")
+            cout << st.size() << '\n';
+        else if (a == "top")
+        {
             if (st.empty())
-                cout << -1 << "\n";
+                cout << -1 << '\n';
             else
-                cout << st.top() << "\n";
+                cout << st.top() << '\n';
+        }
+        else
+            cout << st.empty() << '\n';
     }
     return 0;
 }
