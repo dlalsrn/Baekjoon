@@ -1,86 +1,76 @@
 // 숨바꼭질 2
+// 23.04.10
 #include <iostream>
 #include <queue>
+#include <vector>
 using namespace std;
+
+vector <bool> check(100001, false);
+vector <pair<int, int>> v(100001, { 0, 0 });
+queue <int> q;
+int N, K;
 
 int main(void)
 {
-	queue <pair<int, int>> q;
-	bool TF[100001] = { 0 };
-	pair<int, int> loc[100001] = { {0, 0} };
-	int N, K;
 	cin >> N >> K;
-	q.push({ N, 0 });
-	loc[N] = { 0,1 };
-	TF[N] = true;
+	q.push(N);
+	check[N] = true;
+	v[N] = { 0, 1 };
+
 	while (!q.empty())
 	{
-		pair<int, int> temp = q.front();
+		int x = q.front();
+		int cnt = v[x].first;
 		q.pop();
-		int L = temp.first;
-		int cnt = temp.second;
-		if (L - 1 >= 0)
+
+		if (x - 1 >= 0)
 		{
-			if (TF[L - 1] == false)
+			if (!check[x - 1] || cnt + 1 < v[x - 1].first)
 			{
-				TF[L - 1] = true;
-				loc[L - 1] = { cnt + 1, 1 };
-				q.push({ L - 1, cnt + 1 });
+				check[x - 1] = true;
+				v[x - 1].first = cnt + 1;
+				v[x - 1].second = 1;
+				q.push(x - 1);
 			}
-			else
+			else if (cnt + 1 == v[x - 1].first)
 			{
-				if (loc[L - 1].first >= cnt + 1)
-				{
-					if (loc[L - 1].first == cnt + 1)
-						loc[L - 1].second++;
-					else
-						loc[L - 1] = { cnt + 1, 1 };
-					q.push({ L - 1, cnt + 1 });
-				}
+				v[x - 1].second++;
+				q.push(x - 1);
 			}
 		}
-		if (L + 1 <= 100000)
+		if (x + 1 <= 100000)
 		{
-			if (TF[L + 1] == false)
+			if (!check[x + 1] || cnt + 1 < v[x + 1].first)
 			{
-				TF[L + 1] = true;
-				loc[L + 1] = { cnt + 1, 1 };
-				q.push({ L + 1, cnt + 1 });
+				check[x + 1] = true;
+				v[x + 1].first = cnt + 1;
+				v[x + 1].second = 1;
+				q.push(x + 1);
 			}
-			else
+			else if (cnt + 1 == v[x + 1].first)
 			{
-				if (loc[L + 1].first >= cnt + 1)
-				{
-					if (loc[L + 1].first == cnt + 1)
-						loc[L + 1].second++;
-					else
-						loc[L + 1] = { cnt + 1, 1 };
-					q.push({ L + 1, cnt + 1 });
-				}
+				v[x + 1].second++;
+				q.push(x + 1);
 			}
 		}
-		if (L * 2 <= 100000)
+		if (x * 2 <= 100000)
 		{
-			if (TF[L * 2] == false)
+			if (!check[x * 2] || cnt + 1 < v[x * 2].first)
 			{
-				TF[L * 2] = true;
-				loc[L * 2] = { cnt + 1, 1 };
-				q.push({ L * 2, cnt + 1 });
+				check[x * 2] = true;
+				v[x * 2].first = cnt + 1;
+				v[x * 2].second = 1;
+				q.push(x * 2);
 			}
-			else
+			else if (cnt + 1 == v[x * 2].first)
 			{
-				if (loc[L * 2].first >= cnt + 1)
-				{
-					if (loc[L * 2].first == cnt + 1)
-						loc[L * 2].second++;
-					else
-						loc[L * 2] = { cnt + 1, 1 };
-					q.push({ L * 2, cnt + 1 });
-				}
+				v[x * 2].second++;
+				q.push(x * 2);
 			}
 		}
 	}
 
-	cout << loc[K].first << '\n' << loc[K].second;
+	cout << v[K].first << '\n' << v[K].second;
+
 	return 0;
 }
