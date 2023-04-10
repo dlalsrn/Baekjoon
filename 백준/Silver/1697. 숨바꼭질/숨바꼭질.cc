@@ -1,77 +1,57 @@
-// 숨바꼭질 3
+// 숨바꼭질
 #include <iostream>
 #include <queue>
+#include <vector>
+#include <algorithm>
 using namespace std;
+
+vector <bool> check(100001, false);
+vector <int> v(100001);
+queue <int> q;
+int N, K;
 
 int main(void)
 {
-	queue <pair<int, int>> q;
-	bool TF[100001] = { 0 };
-	int loc[100001] = { 0 };
-	int N, K;
 	cin >> N >> K;
-	q.push({ N, 0 });
-	loc[N] = 0;
-	TF[N] = true;
+	q.push(N);
+	check[N] = true;
+	v[N] = 0;
+
 	while (!q.empty())
 	{
-		pair<int, int> temp = q.front();
+		int x = q.front(), cnt = v[x];
 		q.pop();
-		int L = temp.first;
-		int cnt = temp.second;
-		if (L - 1 >= 0)
+
+		if (x - 1 >= 0)
 		{
-			if (TF[L - 1] == false)
+			if (!check[x - 1] || cnt + 1 < v[x - 1])
 			{
-				TF[L - 1] = true;
-				loc[L - 1] = cnt + 1;
-				q.push({ L - 1, cnt + 1 });
-			}
-			else
-			{
-				if (loc[L - 1] > cnt + 1)
-				{
-					loc[L - 1] = cnt + 1;
-					q.push({ L - 1, cnt + 1 });
-				}
+				check[x - 1] = true;
+				v[x - 1] = cnt + 1;
+				q.push(x - 1);
 			}
 		}
-		if (L + 1 <= 100000)
+		if (x + 1 <= 100000)
 		{
-			if (TF[L + 1] == false)
+			if (!check[x + 1] || cnt + 1 < v[x + 1])
 			{
-				TF[L + 1] = true;
-				loc[L + 1] = cnt + 1;
-				q.push({ L + 1, cnt + 1 });
-			}
-			else
-			{
-				if (loc[L + 1] > cnt + 1)
-				{
-					loc[L + 1] = cnt + 1;
-					q.push({ L + 1, cnt + 1 });
-				}
+				check[x + 1] = true;
+				v[x + 1] = cnt + 1;
+				q.push(x + 1);
 			}
 		}
-		if (L * 2 <= 100000)
+		if (x * 2 <= 100000)
 		{
-			if (TF[L * 2] == false)
+			if (!check[x * 2] || cnt + 1 < v[x * 2])
 			{
-				TF[L * 2] = true;
-				loc[L * 2] = cnt+1;
-				q.push({ L * 2, cnt +1});
-			}
-			else
-			{
-				if (loc[L * 2] > cnt+1)
-				{
-					loc[L * 2] = cnt+1;
-					q.push({ L * 2, cnt +1});
-				}
+				check[x * 2] = true;
+				v[x * 2] = cnt + 1;
+				q.push(x * 2);
 			}
 		}
 	}
 
-	cout << loc[K];
+	cout << v[K];
+
 	return 0;
 }
