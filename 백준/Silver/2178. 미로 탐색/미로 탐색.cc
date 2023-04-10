@@ -1,61 +1,64 @@
-#include <string>
 #include <iostream>
-#include <algorithm>
 #include <vector>
 #include <queue>
-#include <utility>
-#include <memory.h>
+#include <string>
+#include <algorithm>
 using namespace std;
 
-int n, m;
-int mat[101][101];
-int visited[101][101];
-int dy[4] = { 1, -1, 0, 0 };
-int dx[4] = { 0, 0, 1, -1 };
+int N, M;
+string x;
+vector <string> map;
+vector <vector<bool>> check;
+queue <pair<int, pair<int, int>>> q;
+int dx[4] = { 1, 0, -1, 0 };
+int dy[4] = { 0, 1, 0, -1 };
 
-void BAEK_2178_bfs(int sy, int sx)
+void BFS()
 {
-	queue <pair <int, int> > q;
-	q.push({ sy, sx });
 	while (!q.empty())
 	{
-		int y = q.front().first;
-		int x = q.front().second;
+		int y = q.front().second.first;
+		int x = q.front().second.second;
+		int c = q.front().first;
+		if (y == N - 1 && x == M - 1)
+		{
+			cout << c;
+			q = queue <pair<int, pair<int, int>>>();
+			continue;
+		}
 		q.pop();
 		for (int i = 0; i < 4; i++)
 		{
 			int yy = y + dy[i];
 			int xx = x + dx[i];
-			if (yy < 0 || xx < 0 || xx >= m || yy >= n)
+			if (yy < 0 || xx < 0 || xx >= M || yy >= N || check[yy][xx] || map[yy][xx] == '0')
 				continue;
-			if (mat[yy][xx] == 1 && visited[yy][xx] == 1)
-			{
-				visited[yy][xx] = visited[y][x] + 1;
-				q.push({ yy, xx });
-			}
+
+			check[yy][xx] = true;
+			q.push(make_pair(c + 1, make_pair(yy, xx)));
 		}
 	}
 }
 
 int main(void)
 {
-	cin >> n >> m;
-	for (int i = 0; i < n; i++)
-		for (int s = 0; s < m; s++)
-			visited[i][s] = 1;
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
 
-	for (int i = 0; i < n; i++)
+	cin >> N >> M;
+
+	check = vector<vector<bool>>(N, vector<bool>(M, false));
+
+	for (int i = 0; i < N; i++)
 	{
-		string a; cin >> a;
-		for (int s = 0; s < m; s++)
-		{
-			if (a[s] == '0') 
-				mat[i][s] = 0;
-			else 
-				mat[i][s] = 1;
-		}
+		cin >> x;
+		map.push_back(x);
 	}
-	BAEK_2178_bfs(0, 0);
-	printf("%d\n", visited[n - 1][m - 1]);
-    return 0;
+
+	q.push(make_pair(1, make_pair(0, 0)));
+	check[0][0] = true;
+
+	BFS();
+
+	return 0;
 }
