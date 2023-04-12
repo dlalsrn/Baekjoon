@@ -3,7 +3,7 @@
 using namespace std;
 
 typedef long long ll;
-ll N, sum = 0, ans = 0, cnt = 0, fac = 1;
+ll N, sum = 0, ans = 0, fac = 1;
 
 int main(void)
 {
@@ -13,12 +13,8 @@ int main(void)
 	{
 		sum = (sum + i * 2) % MOD;
 		ans = (ans + sum * i) % MOD;
+		fac = (fac * i) % MOD;
 	}
 
-	for (int i = 2; i <= N; i++)
-		fac = (fac * i) % MOD;
-
 	cout << ans << ' ' << fac * fac % MOD;
-
-	return 0;
 }
