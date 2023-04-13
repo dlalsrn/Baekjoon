@@ -1,2 +1,2 @@
-#include<iostream>
-main(){int N,M;std::cin>>N>>M;std::cout<<(N*M-2?"GomGom":"ChongChong");}
+#import<ios>
+main(){int n,m;scanf("%d%d",&n,&m);if(n+m-3)puts("GomGom");else puts("ChongChong");}
