@@ -3,10 +3,10 @@
 #include <algorithm>
 using namespace std;
 
-int N, x, mx = 0, ans = 0;
+int N, x, mx = 0, l, r;
 vector <int> v;
-vector <int> L; // 왼쪽으로 돌 때
-vector <int> R; // 오른쪽으로 돌 때
+vector <int> L;
+vector <int> R;
 
 int main(void)
 {
@@ -22,34 +22,24 @@ int main(void)
 	}
 
 	for (int i = 0; i < N; i++)
-	{
-		R[i + 1] = v[i];
-		if (i)
-			R[i + 1] += R[i];
-	}
+		R[i + 1] = v[i] + R[i];
 
 	for (int i = 0; i < N; i++)
-	{
-		L[i + 1] = v[N - 1 - i];
-		if (i)
-			L[i + 1] += L[i];
-	}
+		L[i + 1] = v[N - 1 - i] + L[i];
 
-	int i = 0, j = 1;
+	l = 0, r = 1;
 
 	while (1)
 	{
-		if (mx < max(mx, min(R[j] - R[i], L[N - j] + R[i])) || R[j] - R[i] < L[N - j] + R[i])
+		if (mx < max(mx, min(R[r] - R[l], L[N - r] + R[l])) || R[r] - R[l] < L[N - r] + R[l])
 		{
-			mx = max(mx, min(R[j] - R[i], L[N - j] + R[i]));
-			if (++j > N)
+			mx = max(mx, min(R[r] - R[l], L[N - r] + R[l]));
+			if (++r > N)
 				break;
 		}
 		else
-		{
-			if (++i > N)
+			if (++l > N)
 				break;
-		}
 	}
 
 	cout << mx;
