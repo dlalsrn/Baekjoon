@@ -25,8 +25,6 @@ int main(void)
 				mx = mid - 1;
 		}
 
-		mn = last_mn;
-
 		while(mx - mn != 0)
 		{
 			int mid = (mx + mn + 1) / 2;
