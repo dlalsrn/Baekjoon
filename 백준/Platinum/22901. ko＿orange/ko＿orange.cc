@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-int last_mn, mx, mn, T, x;
+int last_mn, last_mx, mx, mn, T, x;
+bool check = true;
 
 int main(void)
 {
@@ -9,21 +10,7 @@ int main(void)
 
 	for (int t = 0; t < T; t++)
 	{
-		mx = 2399, mn = 2100, last_mn = 2100;
-		for (int i = 0; i < 4; i++)
-		{
-			int mid = (mx + mn + 1) / 2;
-			cout << "? " << mid << endl;
-			cin >> x;
-
-			if (x == 1)
-			{
-				last_mn = mn;
-				mn = mid;
-			}
-			else
-				mx = mid - 1;
-		}
+		mx = 2399, mn = 2100, last_mn = 2100, last_mx = 2399, check = true;
 
 		while(mx - mn != 0)
 		{
@@ -34,18 +21,23 @@ int main(void)
 			if (x == 1)
 			{
 				last_mn = mn;
-				mn = mid;
+				last_mx = mn = mid;
 			}
 			else
 				mx = mid - 1;
-			if (mx - mn == 0)
+
+			if (mx - mn == 0 && check)
 			{
 				cout << "? " << mn << endl;
 				cin >> x;
 				if (x == 1)
 					break;
 				else
+				{
+					check = false;
 					mn = last_mn;
+					mx = last_mx - 1;
+				}
 			}
 		}
 
