@@ -4,11 +4,8 @@
 #include <algorithm>
 using namespace std;
 
-int N, sum = 1, mx = 0;
+int N, sum = 1, mx;
 vector <int> v;
-vector <int> ans;
-vector <vector<int>> node;
-
 
 int GCD(int a, int b)
 {
@@ -30,13 +27,6 @@ int main(void)
 	cin >> N;
 
 	v = vector<int>(N + 1);
-	node = vector<vector<int>>(N + 1);
-
-	if (N == 1)
-	{
-		cout << 1;
-		return 0;
-	}
 
 	for (int i = 1; i <= N; i++)
 	{
@@ -52,7 +42,7 @@ int main(void)
 	v[1]++;
 
 	mx = N;
-	while (sum--)
+	while (mx != 1)
 	{
 		v[mx]--;
 		cout << mx << ' ';
@@ -65,6 +55,6 @@ int main(void)
 		else
 			mx -= 2;
 	}
-
+	cout << 1;
 	return 0;
 }
