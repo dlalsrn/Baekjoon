@@ -7,11 +7,11 @@ vector <vector<int>> node;
 vector <int> parent;
 vector <int> depth;
 
-void DFS(int r, int d)
+void DFS(int n, int d)
 {
-	depth[r] = d;
-	for (int i = 0; i < node[r].size(); i++)
-		DFS(node[r][i], d + 1);
+	depth[n] = d;
+	for (int x : node[n])
+		DFS(x, d + 1);
 }
 
 int LCA(int u, int v)
@@ -37,7 +37,7 @@ int main(void)
 		cin >> N;
 		
 		parent = vector<int>(N + 1, -1);
-		depth = vector<int>(N + 1, 0);
+		depth = vector<int>(N + 1);
 		node = vector<vector<int>>(N + 1);
 
 		for (int i = 0; i < N - 1; i++)
