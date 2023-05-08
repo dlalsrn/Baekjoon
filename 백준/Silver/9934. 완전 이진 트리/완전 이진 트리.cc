@@ -1,44 +1,36 @@
 #include <iostream>
-#include <stack>
-#include <string>
-#include <queue>
-#include <algorithm>
 #include <vector>
-#include <stdlib.h>
-#include <math.h>
 using namespace std;
 
-void Print_Node(int depth, int arr[], int root, int temp)
+vector <int> node;
+int N, n;
+
+void print(int d, int L, int T)
 {
-	temp /= 2;
-	if (depth == 0)
-	{
-		cout << arr[root] << " ";
-	}
+	if (d == 0)
+		cout << node[L] << ' ';
 	else
 	{
-		Print_Node(depth - 1, arr, root - (temp / 2) - 1, temp);
-		Print_Node(depth - 1, arr, root + (temp / 2) + 1, temp);
+		print(d - 1, L - ((T - L) / 2), L);
+		print(d - 1, L + ((T - L) / 2), T);
 	}
 }
+
 int main(void)
 {
-	ios::sync_with_stdio(0); cin.tie(0);
-	int N, buliding[1024] = { 0 };
+	cin.tie(0)->sync_with_stdio(false);
 	cin >> N;
-	int len = 0, num;
 
-	for (int i = 0; i < pow(2, N) - 1; i++)
-	{
-		cin >> num;
-		buliding[i] = num;
-		len++;
-	}
+	node.resize((1 << N) - 1);
+
+	for (int i = 0; i < (1 << N) - 1; i++)
+		cin >> node[i];
 
 	for (int i = 0; i < N; i++)
 	{
-		Print_Node(i, buliding, len/2, len);
-		cout << "\n";
+		print(i, ((1 << N) - 1) / 2, (1 << N) - 1);
+		cout << '\n';
 	}
-    return 0;
+
+	return 0;
 }
