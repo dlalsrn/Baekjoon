@@ -1,40 +1,40 @@
-// 트리의 부모 찾기
 #include <iostream>
 #include <vector>
-#include <queue>
 using namespace std;
+
+int N, u, v;
+vector <vector<int>> node;
+vector <int> parent;
+
+void DFS(int n, int pn)
+{
+	parent[n] = pn;
+	for (int x : node[n])
+		if (x != pn)
+			DFS(x, n);
+}
 
 int main(void)
 {
-	int N, n1, n2;
+	cin.tie(0)->sync_with_stdio(false);
+	cout.tie(0);
+
 	cin >> N;
-	vector <vector<int>> v(N + 1);
-	vector <int> check(N + 1);
-	vector <bool> visit(N + 1, false);
-	queue <int> q;
+
+	node.resize(N + 1);
+	parent.resize(N + 1);
+
 	for (int i = 0; i < N - 1; i++)
 	{
-		cin >> n1 >> n2;
-		v[n1].push_back(n2);
-		v[n2].push_back(n1);
+		cin >> u >> v;
+		node[u].push_back(v);
+		node[v].push_back(u);
 	}
-	q.push(1);
-	visit[1] = true;
-	while (!q.empty())
-	{
-		int n = q.front();
-		q.pop();
-		for (int i = 0; i < v[n].size(); i++)
-		{
-			if (!visit[v[n][i]])
-			{
-				visit[v[n][i]] = true;
-				check[v[n][i]] = n;
-				q.push(v[n][i]);
-			}
-		}
-	}
+
+	DFS(1, -1);
+
 	for (int i = 2; i <= N; i++)
-		cout << check[i] << '\n';
+		cout << parent[i] << '\n';
+
 	return 0;
 }
