@@ -59,9 +59,7 @@ int main(void)
 		DFS(root, 0);
 
 		cin >> u >> v;
-		int lca = LCA(u, v);
-
-		cout << lca << '\n';
+		cout << LCA(u, v) << '\n';
 	}
 
 	return 0;
