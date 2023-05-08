@@ -1,96 +1,61 @@
 #include <iostream>
-#include <stack>
-#include <string>
-#include <queue>
-#include <algorithm>
 #include <vector>
-#include <stdlib.h>
 using namespace std;
 
-typedef struct BAEK_1991_tree
-{
-	struct BAEK_1991_tree* left;
-	char alpha;
-	struct BAEK_1991_tree* right;
-}Tree;
+vector <int> node[26];
+int N;
+char a, b, c;
 
-void Print_tree_pre(Tree*head)
+void pre(int n)
 {
-	cout << head->alpha;
-	if (head->left != NULL)
-		Print_tree_pre(head->left);
-	if (head->right != NULL)
-		Print_tree_pre(head->right);
+	cout << (char)(n + 'A');
+	if (node[n][0] != -1)
+		pre(node[n][0]);
+	if (node[n][1] != -1)
+		pre(node[n][1]);
 }
 
-void Print_tree_in(Tree*head)
+void in(int n)
 {
-	if (head->left != NULL)
-		Print_tree_in(head->left);
-	cout << head->alpha;
-	if (head->right != NULL)
-		Print_tree_in(head->right);
+	if (node[n][0] != -1)
+		in(node[n][0]);
+	cout << (char)(n + 'A');
+	if (node[n][1] != -1)
+		in(node[n][1]);
 }
 
-void Print_tree_post(Tree*head)
+void post(int n)
 {
-	if (head->left != NULL)
-		Print_tree_post(head->left);
-	if (head->right != NULL)
-		Print_tree_post(head->right);
-	cout << head->alpha;
-}
-Tree* Add_Node(char a)
-{
-	Tree*temp = (Tree*)malloc(sizeof(Tree));
-	temp->alpha = a;
-	temp->left = NULL;
-	temp->right = NULL;
-	return temp;
-}
-
-void Node(Tree*head, char a, char b, char c)
-{
-	if (head->alpha == a)
-	{
-		if (b != '.')
-			head->left = Add_Node(b);
-		if (c != '.')
-			head->right = Add_Node(c);
-	}
-	else
-	{
-		if (head->left != NULL)
-			Node(head->left, a, b, c);
-		if (head->right != NULL)
-			Node(head->right, a, b, c);
-	}
+	if (node[n][0] != -1)
+		post(node[n][0]);
+	if (node[n][1] != -1)
+		post(node[n][1]);
+	cout << (char)(n + 'A');
 }
 
 int main(void)
 {
-	int N;
-	Tree * head = (Tree*)malloc(sizeof(Tree));
+	cin.tie(0)->sync_with_stdio(false);
 	cin >> N;
+
 	for (int i = 0; i < N; i++)
 	{
-		char a, b, c;
 		cin >> a >> b >> c;
-		if (i == 0)
-		{
-			head->alpha = a;
-			if (b != '.')
-				head->left = Add_Node(b);
-			if (c != '.')
-				head->right = Add_Node(c);
-		}
+		if (b != '.')
+			node[a - 'A'].push_back(b - 'A');
 		else
-			Node(head, a, b, c);
+			node[a - 'A'].push_back(-1);
+		if (c != '.')
+			node[a - 'A'].push_back(c - 'A');
+		else
+			node[a - 'A'].push_back(-1);
 	}
-	Print_tree_pre(head);
-	cout << "\n";
-	Print_tree_in(head);
-	cout << "\n";
-	Print_tree_post(head);
-    return 0;
+
+	pre(0);
+	cout << '\n';
+	in(0);
+	cout << '\n';
+	post(0);
+
+	return 0;
 }
