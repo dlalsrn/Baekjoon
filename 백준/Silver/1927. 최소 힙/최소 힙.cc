@@ -1,38 +1,34 @@
 #include <iostream>
-#include <stack>
-#include <string>
 #include <queue>
-#include <algorithm>
-#include <vector>
-#include <stdlib.h>
-#include <math.h>
-#include <functional>
 using namespace std;
+
+int N, x;
+priority_queue <int, vector<int>, greater<int>> pq;
 
 int main(void)
 {
-	priority_queue <int, vector<int>, greater<int>> q;
-	int N;
-	scanf(" %d", &N);
+	cin.tie(0)->sync_with_stdio(false);
+	cout.tie(0);
+
+	cin >> N;
 
 	for (int i = 0; i < N; i++)
 	{
-		int num;
-		scanf(" %d", &num);
-		if (num != 0)
-			q.push(num);
+		cin >> x;
+
+		if (x)
+			pq.push(x);
 		else
 		{
-			if (q.empty())
-			{
-				printf("0\n");
-			}
+			if (pq.empty())
+				cout << "0\n";
 			else
 			{
-				printf("%d\n", q.top());
-				q.pop();
+				cout << pq.top() << '\n';
+				pq.pop();
 			}
 		}
 	}
-    return 0;
+
+	return 0;
 }
