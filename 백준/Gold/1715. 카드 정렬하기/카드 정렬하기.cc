@@ -2,33 +2,35 @@
 #include <queue>
 using namespace std;
 
+int N, x;
+long long sum = 0;
+priority_queue <int, vector<int>, greater<int>> q;
+
 int main(void)
 {
-	priority_queue <int, vector<int>, greater<int>> q;
-	int N, num;
-	long long sum = 0;
+	cin.tie(0)->sync_with_stdio(false);
+
 	cin >> N;
+
 	for (int i = 0; i < N; i++)
 	{
-		cin >> num;
-		q.push(num);
+		cin >> x;
+		q.push(x);
 	}
 
-	if (N != 1)
+	while (q.size() != 1)
 	{
-		while (true)
-		{
-			int first = q.top();
-			q.pop();
-			int second = q.top();
-			q.pop();
-			sum += (first + second);
-			if (q.empty())
-				break;
-			else
-				q.push(first + second);
-		}
+		int first = q.top();
+		q.pop();
+		int second = q.top();
+		q.pop();
+
+		sum += (first + second);
+
+		q.push(first + second);
 	}
+
 	cout << sum;
+
 	return 0;
 }
