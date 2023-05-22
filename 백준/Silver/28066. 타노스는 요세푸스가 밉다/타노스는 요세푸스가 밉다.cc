@@ -14,10 +14,9 @@ int main(void)
 
 	while (dq.size() >= M)
 	{
-		int x = dq.front();
+        dq.push_back(dq.front());
 		for (int i = 0; i < M; i++)
 			dq.pop_front();
-		dq.push_back(x);
 	}
 
 	cout << dq.front() + 1;
