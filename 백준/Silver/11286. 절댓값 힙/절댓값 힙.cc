@@ -7,7 +7,11 @@ int N, x;
 
 int main(void)
 {
+	cin.tie(0)->sync_with_stdio(false);
+	cout.tie(0);
+
 	cin >> N;
+
 	for (int i = 0; i < N; i++)
 	{
 		cin >> x;
