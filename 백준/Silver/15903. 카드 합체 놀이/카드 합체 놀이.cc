@@ -23,12 +23,8 @@ int main(void)
 		pq.pop();
 		ll b = pq.top();
 		pq.pop();
-
-		x = a + b;
-		a = b = x;
-
-		pq.push(a);
-		pq.push(b);
+		pq.push(a + b);
+		pq.push(a + b);
 	}
 
 	x = 0;
