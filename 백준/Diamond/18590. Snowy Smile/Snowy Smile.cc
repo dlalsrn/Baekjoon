@@ -1,7 +1,3 @@
-// 금광
-// 22.09.01
-// 네모난 구역을 만들었을 때 그 안에 담긴 금광들의 합의 최댓값 출력하는 문제
-// 좌표의 값이 크므로 좌표 압축을 해줘야함
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -76,23 +72,23 @@ int main(void)
 			Y.push_back(y);
 		}
 
-		sort(gold.begin(), gold.end()); // y좌표를 오름차순으로 정렬
-		sort(X.begin(), X.end()); // x좌표 오름차순으로 정렬
-		sort(Y.begin(), Y.end()); // y좌표 오름차순으로 정렬
-		X.erase(unique(X.begin(), X.end()), X.end()); // X좌표 압축
-		Y.erase(unique(Y.begin(), Y.end()), Y.end()); // Y좌표 압축
+		sort(gold.begin(), gold.end());
+		sort(X.begin(), X.end());
+		sort(Y.begin(), Y.end());
+		X.erase(unique(X.begin(), X.end()), X.end());
+		Y.erase(unique(Y.begin(), Y.end()), Y.end());
 
 		ll h = (ll)ceil(log2(X.size()));
 
 		for (ll y = 0; y < Y.size(); y++)
 		{
-			segtree = vector<NODE>((1 << (h + 1)), { 0, 0, 0, 0 }); // 초기화
+			segtree = vector<NODE>((1 << (h + 1)), { 0, 0, 0, 0 });
 			for (ll i = 0; i < N; i++)
 			{
-				if (gold[i].first < Y[y]) // 이전 y좌표보다 금광의 y좌표가 작으면 continue
+				if (gold[i].first < Y[y])
 					continue;
 				update(1, 0, X.size() - 1, lower_bound(X.begin(), X.end(), gold[i].second.first) - X.begin(), gold[i].second.second);
-				if (i < N - 1 && gold[i].first == gold[i + 1].first) // y좌표가 같으면 계속 update
+				if (i < N - 1 && gold[i].first == gold[i + 1].first)
 					continue;
 				mx = max(mx, segtree[1].T_MAX);
 			}
