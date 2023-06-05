@@ -7,6 +7,8 @@ vector <int> v;
 
 int main(void)
 {
+	cin.tie(0)->sync_with_stdio(false);
+
 	cin >> N;
 
 	for (int i = 0; i < N; i++)
