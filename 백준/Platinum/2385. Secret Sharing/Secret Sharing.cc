@@ -3,45 +3,38 @@
 #include <algorithm>
 using namespace std;
 
-int N, start;
-string x, zero = "";
+int N;
+string t, ans = "INVALID";
 vector <string> v;
 
-bool cmp1(string a, string b)
+bool cmp(string a, string b)
 {
 	return a + b < b + a;
-}
-
-bool cmp2(string a, string b)
-{
-	return a + zero + b < b + zero + a;
 }
 
 int main(void)
 {
 	cin >> N;
+	v.resize(N);
+
+	for (int i = 0; i < N; i++)
+		cin >> v[i];
+
+	sort(v.begin(), v.end(), cmp);
 
 	for (int i = 0; i < N; i++)
 	{
-		cin >> x;
-		v.push_back(x);
+		if (v[i][0] != '0')
+		{
+			t = v[i];
+			for (int j = 0; j < N; j++)
+				if (j != i)
+					t += v[j];
+			ans = min(ans, t);
+		}
 	}
 
-	sort(v.begin(), v.end(), cmp1);
-	
-	for (start = 0; start < N && v[start][0] == '0'; start++)
-		zero += v[start];
+	cout << ans;
 
-	if (start == N)
-		cout << "INVALID";
-	else
-	{
-		//sort(v.begin() + start, v.end(), cmp2);
-		int m = min_element(v.begin() + start, v.end(), cmp2) - v.begin();
-		cout << v[m];
-		for (int i = 0; i < N; i++)
-			if (i != m)
-				cout << v[i];
-	}
 	return 0;
 }
