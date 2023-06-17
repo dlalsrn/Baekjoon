@@ -3,16 +3,14 @@
 using namespace std;
 using ll = long long;
 
-ll N, x = 2, cnt = 0, m = 2;
-vector <ll> v(1001);
+ll N, x = 1, cnt = 0, m = 1;
+vector <ll> v(1001, 0);
 
 int main(void)
 {
 	cin.tie(0)->sync_with_stdio(false);
 
-	v[1] = 1;
-
-	for (int i = 2; i <= 1000; i++)
+	for (int i = 1; i <= 1000; i++)
 	{
 		if (cnt == m)
 		{
