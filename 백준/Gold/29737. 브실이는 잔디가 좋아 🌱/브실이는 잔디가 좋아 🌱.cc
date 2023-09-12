@@ -35,7 +35,7 @@ bool cmp(NODE a, NODE b)
 	}
 }
 
-int N, W, X, F, f, L, S, mx_L, mx_F, mx_S, cnt = 0;
+int N, W, X, F, f, L, S, mx_L, mx_F, mx_S, cnt;
 string n, streak, x;
 vector <NODE> v;
 
@@ -49,13 +49,14 @@ int main(void)
 	{
 		cin >> n;
 		streak = "";
+
 		for (int i = 0; i < 7; i++)
 		{
 			cin >> x;
 			streak += x;
 		}
 
-		mx_L = 0, mx_F = 0, mx_S = 0, L = 0, X = 0, F = 0, S = 0, cnt = 0, f = 0;
+		mx_L = mx_F = mx_S = L = X = F = S = cnt = f = 0;
 		for (int w = 0; w < W; w++)
 		{
 			for (int i = 0; i < 7; i++)
@@ -95,7 +96,7 @@ int main(void)
 							mx_S = S;
 						}
 					}
-					L = 0, F = 0, S = 0, f = 0;
+					L = F = S = f = 0;
 					X++;
 				}
 				cnt++;
@@ -123,9 +124,6 @@ int main(void)
 
 	sort(v.begin(), v.end(), cmp);
 
-	//for (int i = 0; i < N; i++)
-		//cout << v[i].name << ' ' << v[i].len << ' ' << v[i].freeze << ' ' << v[i].start << ' ' << v[i].fail << '\n';
-	//cout << "==================================\n";
 	cnt = 1;
 	for (int i = 0; i < N; i++)
 	{
