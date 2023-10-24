@@ -22,20 +22,57 @@ int main(void)
 			ll ans = 0;
 			while (a != b)
 			{
-				if (!m[a])
-					m[a] = a / 2;
-				if (!m[b])
-					m[b] = b / 2;
-
-				if (m[a] > m[b])
+				if (m.find(a) == m.end() && m.find(b) == m.end())
 				{
-					ans += a;
-					a = m[a];
+					if (a / 2 > b / 2)
+					{
+						ans += a;
+						a /= 2;
+					}
+					else
+					{
+						ans += b;
+						b /= 2;
+					}
+				}
+				else if (m.find(b) == m.end())
+				{
+					if (m[a] > b / 2)
+					{
+						ans += a;
+						a = m[a];
+					}
+					else
+					{
+						ans += b;
+						b /= 2;
+					}
+				}
+				else if (m.find(a) == m.end())
+				{
+					if (a / 2 > m[b])
+					{
+						ans += a;
+						a /= 2;
+					}
+					else
+					{
+						ans += b;
+						b = m[b];
+					}
 				}
 				else
 				{
-					ans += b;
-					b = m[b];
+					if (m[a] > m[b])
+					{
+						ans += a;
+						a = m[a];
+					}
+					else
+					{
+						ans += b;
+						b = m[b];
+					}
 				}
 			}
 			
