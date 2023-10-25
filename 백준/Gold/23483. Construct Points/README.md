@@ -1,4 +1,4 @@
-# [Gold IV] Construct Points - 23483 
+# [Gold III] Construct Points - 23483 
 
 [문제 링크](https://www.acmicpc.net/problem/23483) 
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2023년 10월 25일 14:16:02
+2023년 10월 25일 15:24:59
 
 ### 문제 설명
 
