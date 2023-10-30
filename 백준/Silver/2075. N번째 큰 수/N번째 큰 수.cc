@@ -2,7 +2,7 @@
 using namespace std;
 
 int N, x;
-priority_queue <int, vector<int>, greater<int>> pq;
+int v[2250000];
 
 int main(void)
 {
@@ -10,19 +10,12 @@ int main(void)
 
 	cin >> N;
 
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			cin >> x;
-			pq.push(x);
-		}
+	for (int i = 0; i < N * N; i++)
+		cin >> v[i];
 
-		while (pq.size() != N)
-			pq.pop();
-	}
+	sort(v, v + N*N);
 
-	cout << pq.top();
+	cout << v[N*N-N];
 
 	return 0;
 }
