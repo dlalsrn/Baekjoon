@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int N, x;
+int N, x, i;
 map <int, int> m;
 
 int main(void)
@@ -9,16 +9,14 @@ int main(void)
 	cin.tie(0)->sync_with_stdio(false);
 	cin >> N;
 
-	for (int i = 0; i < N; i++)
+	for (i = 0; i < N; i++)
 	{
 		cin >> x;
-		if (m.find(x) != m.end())
+		if (m[x])
 		{
 			cout << i + 1 << ' ' << m[x];
-			break;
+			return 0;
 		}
 		m[x] = i + 1;
 	}
-
-	return 0;
 }
