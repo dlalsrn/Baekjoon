@@ -2,7 +2,7 @@
 using namespace std;
 
 int N;
-vector <bool> v(33554433, false);
+vector<bool> v(33554433, false);
 
 int main(void)
 {
