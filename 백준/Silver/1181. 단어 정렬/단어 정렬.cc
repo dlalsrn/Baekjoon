@@ -1,36 +1,39 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include <bits/stdc++.h>
 using namespace std;
+
+int N;
+string x;
+vector <string> v;
 
 bool compare(string a, string b)
 {
-    if (a.size() == b.size())
-    {
-        return a < b;
-    }
-    return a.size() < b.size();
-
+	if (a.size() == b.size()) return a < b;
+	return a.size() < b.size();
 }
-int main() {
 
+int main(void)
+{
+	cin.tie(0)->sync_with_stdio(false);
 
-    int i, N;
-    cin >> N;
-    string temp;
-    vector<string> ss;
-    for (i = 0; i < N; i++)
-    {
-        cin >> temp;
-        ss.push_back(temp);
-    }
+	cin >> N;
 
-    sort(ss.begin(), ss.end(), compare);
+	for (int i = 0; i < N; i++)
+	{
+		cin >> x;
+		v.push_back(x);
+	}
 
-    ss.erase(unique(ss.begin(), ss.end()), ss.end());
-    for (i = 0; i < ss.size(); i++)
-    {
-        cout << ss[i] << "\n";
-    }
-    return 0;
+	sort(v.begin(), v.end(), compare);
+
+	for (int i = 0; i < N; i++)
+	{
+		if (i == 0) cout << v[i] << '\n';
+		else
+		{
+			if (v[i] != v[i - 1]) 
+				cout << v[i] << '\n';
+		}
+	}
+
+	return 0;
 }
