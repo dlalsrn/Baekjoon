@@ -1,25 +1,41 @@
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
+
+typedef struct
+{
+	int kor;
+	int eng;
+	int math;
+	string name;
+}Node;
+
+int N, kor, eng, math;
+string name;
+vector <Node> v;
+
+bool compare(Node a, Node b)
+{
+	if (a.kor != b.kor) return a.kor > b.kor;
+	if (a.eng != b.eng) return a.eng < b.eng;
+	if (a.math != b.math) return a.math > b.math;
+	return a.name < b.name;
+}
 
 int main(void)
 {
-	int n;
-	cin >> n;
-	vector <pair<int, pair<int, pair<int, string>>>> v;
+	cin.tie(0)->sync_with_stdio(false);
 
-	for (int i = 0; i < n; i++)
+	cin >> N;
+
+	for (int i = 0; i < N; i++)
 	{
-		string name;
-		int kor, eng, math;
 		cin >> name >> kor >> eng >> math;
-		v.push_back(make_pair(100 - kor, make_pair(eng, make_pair(100 - math, name))));
+		v.push_back({kor, eng, math, name});
 	}
-	sort(v.begin(), v.end());
 
-	for (int i = 0; i < n; i++)
-		cout << v[i].second.second.second << '\n';
-    return 0;
+	sort(v.begin(), v.end(), compare);
+
+	for (int i = 0; i < N; i++) cout << v[i].name << '\n';
+
+	return 0;
 }
