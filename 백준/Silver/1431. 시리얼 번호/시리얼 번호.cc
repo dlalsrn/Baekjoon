@@ -1,30 +1,30 @@
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
+
+int N, sum;
+string a;
+vector <pair<int, pair<int, string>>> v;
 
 int main(void)
 {
-	int n;
-	cin >> n;
-	vector <pair<int, pair<int, string>>> v;
+	cin >> N;
 
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < N; i++)
 	{
-		string a;
 		cin >> a;
-		int sum = 0;
-		for (int s = 0; s < a.size(); s++)
+		sum = 0;
+
+		for (int j = 0; j < a.size(); j++)
 		{
-			if (0 <= a.c_str()[s] - 48 && a.c_str()[s] - 48 <= 9)
-				sum += a.c_str()[s] - 48;
+			if (0 <= a[j] - 48 && a[j] - 48 <= 9)
+				sum += a[j] - 48;
 		}
 		v.push_back(make_pair(a.size(), make_pair(sum, a)));
 	}
 	sort(v.begin(), v.end());
 
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < N; i++)
 		cout << v[i].second.second << '\n';
-    return 0;
+
+	return 0;
 }
