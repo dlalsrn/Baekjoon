@@ -3,23 +3,23 @@
 using namespace std;
 
 int N, M;
-deque <int> dq;
+queue <int> q;
 
 int main(void)
 {
 	cin >> N >> M;
 
 	for (int i = 0; i < N; i++)
-		dq.push_back(i);
+		q.push(i);
 
-	while (dq.size() >= M)
+	while (q.size() >= M)
 	{
-        dq.push_back(dq.front());
+		q.push(q.front());
 		for (int i = 0; i < M; i++)
-			dq.pop_front();
+			q.pop();
 	}
 
-	cout << dq.front() + 1;
+	cout << q.front() + 1;
 
 	return 0;
 }
