@@ -1,10 +1,12 @@
+// 괄호
+// 24.04.01
+// stack
 #include <bits/stdc++.h>
 using namespace std;
 
 int N;
 stack <char> st;
 string x;
-bool check;
 
 int main(void)
 {
@@ -15,24 +17,24 @@ int main(void)
 	for (int i = 0; i < N; i++)
 	{
 		st = stack<char>();
-		check = true;
 		cin >> x;
 
 		for (int j = 0; j < x.size(); j++)
 		{
-			if (x[j] == '(') st.push('(');
-			else
+			st.push(x[i]);
+
+			if (x[j] == ')')
 			{
-				if (st.empty())
+				if (st.size() >= 2)
 				{
-					check = false;
-					break;
+					st.pop();
+					st.pop();
 				}
-				else st.pop();
+				else break;
 			}
 		}
 
-		cout << (check && st.empty() ? "YES\n" : "NO\n");
+		cout << (st.empty() ? "YES\n" : "NO\n");
 	}
 
 	return 0;
