@@ -23,7 +23,7 @@ int main(void)
 			if (x[j] == '(') st.push('(');
 			else
 			{
-				if (st.empty() || st.top() != '(')
+				if (st.empty())
 				{
 					check = false;
 					break;
