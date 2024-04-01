@@ -9,7 +9,7 @@ int main(void)
 {
 	cin >> N >> M;
 
-	for (int i = 0; i < N; i++)
+	for (int i = 1; i <= N; i++)
 		q.push(i);
 
 	while (q.size() >= M)
@@ -19,7 +19,7 @@ int main(void)
 			q.pop();
 	}
 
-	cout << q.front() + 1;
+	cout << q.front();
 
 	return 0;
 }
