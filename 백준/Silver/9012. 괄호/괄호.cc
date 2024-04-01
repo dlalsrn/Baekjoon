@@ -1,38 +1,39 @@
-#include <iostream>
-#include <stack>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
+
+int N;
+stack <char> st;
+string x;
+bool check;
 
 int main(void)
 {
-	int N, cnt;
+	cin.tie(0)->sync_with_stdio(false);
+
 	cin >> N;
 
 	for (int i = 0; i < N; i++)
 	{
-		stack <char> st;
-		cnt = 0;
-		string a;
-		cin >> a;
-		for (int s = 0; s < a.size(); s++)
+		st = stack<char>();
+		check = true;
+		cin >> x;
+
+		for (int j = 0; j < x.size(); j++)
 		{
-			if (a.c_str()[s] == '(')
-			{
-				cnt++;
-				st.push('(');
-			}
+			if (x[j] == '(') st.push('(');
 			else
 			{
-				cnt--;
-				if (cnt < 0)
+				if (st.empty() || st.top() != '(')
+				{
+					check = false;
 					break;
-				st.pop();
+				}
+				else st.pop();
 			}
 		}
-		if (st.empty() && cnt == 0)
-			cout << "YES\n";
-		else
-			cout << "NO\n";
+
+		cout << (check && st.empty() ? "YES\n" : "NO\n");
 	}
-    return 0;
+
+	return 0;
 }
