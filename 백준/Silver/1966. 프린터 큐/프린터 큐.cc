@@ -1,49 +1,46 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
+
+int T, N, M, x;
+vector <int> v;
+queue <pair<int, int>> q;
 
 int main(void)
 {
-	queue <pair<int, int>> q;
-	priority_queue <int> rank;
-	int T, N, M, num, cnt;
+	cin.tie(0)->sync_with_stdio(false);
+
 	cin >> T;
-	
-	for (int i = 0; i < T; i++)
+
+	for (int t = 0; t < T; t++)
 	{
-		queue <pair<int, int>> q;
-		priority_queue <int> rank;
-		cnt = 0;
 		cin >> N >> M;
-		for (int j = 0; j < N; j++)
+
+		v = vector<int>();
+		q = queue<pair<int, int>>();
+
+		for (int i = 0; i < N; i++)
 		{
-			cin >> num;
-			rank.push(num);
-			q.push({ j, num });
+			cin >> x;
+			v.push_back(x);
+			q.push(make_pair(x, i));
 		}
-		
-		while (true)
+		sort(v.begin(), v.end(), greater<>());
+
+		for (int i = 0; i < N; i++)
 		{
-			if (q.front().second == rank.top())
+			while (q.front().first != v[i])
 			{
-				rank.pop();
-				cnt++;
-				if (q.front().first == M)
-				{
-					cout << cnt << endl;
-					break;
-				}
+				q.push(q.front());
 				q.pop();
 			}
-			else
+			if (q.front().second == M)
 			{
-				pair<int, int> a = q.front();
-				q.pop();
-				q.push(a);
+				cout << i + 1 << '\n';
+				break;
 			}
-		}	
+			q.pop();
+		}
 	}
+
 	return 0;
 }
