@@ -2,32 +2,36 @@
 using namespace std;
 using ll = long long;
 
-ll A, B, num, cnt;
-queue <pair<ll, ll>> q;
+ll A, B, cnt = 1;
 
 int main(void)
 {
+	cin.tie(0)->sync_with_stdio(false);
+
 	cin >> A >> B;
 
-	q.push({ A, 1 });
-
-	while (!q.empty())
+	while (B)
 	{
-		num = q.front().first, cnt = q.front().second;
-		q.pop();
-
-		if (num > B) continue;
-		else if (num == B)
+		if (B == A)
 		{
 			cout << cnt;
 			return 0;
 		}
-
-		ll plus = num * 10 + 1;
-		ll mul = num * 2;
-
-		q.push(make_pair(plus, cnt + 1));
-		q.push(make_pair(mul, cnt + 1));
+		if (B % 10 == 1)
+		{
+			B /= 10;
+			cnt++;
+		}
+		else if (B % 2 == 0)
+		{
+			B /= 2;
+			cnt++;
+		}
+		else
+		{
+			cout << -1;
+			return 0;
+		}
 	}
 
 	cout << -1;
