@@ -8,14 +8,11 @@ vector <bool> visit;
 
 void DFS(int n)
 {
+	visit[n] = true;
+    
 	for (int x : node[n])
-	{
 		if (!visit[x])
-		{
-			visit[x] = true;
 			DFS(x);
-		}
-	}
 }
 
 int main(void)
@@ -37,7 +34,6 @@ int main(void)
 		if (!visit[i])
 		{
 			cnt++;
-			visit[i] = true;
 			DFS(i);
 		}
 	}
