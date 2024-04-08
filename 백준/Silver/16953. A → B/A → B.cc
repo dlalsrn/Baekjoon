@@ -1,37 +1,33 @@
-// A -> B
-#include <iostream>
-#include <queue>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+using ll = long long;
 
-ll A, B;
-queue <pair<ll, int>> q;
+ll A, B, num, cnt;
+queue <pair<ll, ll>> q;
 
 int main(void)
 {
 	cin >> A >> B;
 
 	q.push({ A, 1 });
-	
+
 	while (!q.empty())
 	{
-		ll num = q.front().first, cnt = q.front().second;
+		num = q.front().first, cnt = q.front().second;
 		q.pop();
-		if (num > B)
-			continue;
-		ll plus = stoll(to_string(num) + "1");
-		ll mult = num * 2;
 
-		if (num == B)
+		if (num > B) continue;
+		else if (num == B)
 		{
 			cout << cnt;
 			return 0;
 		}
-		if (plus <= B)
-			q.push(make_pair(plus, cnt + 1));
-		if (mult <= B)
-			q.push(make_pair(mult, cnt + 1));
+
+		ll plus = num * 10 + 1;
+		ll mul = num * 2;
+
+		q.push(make_pair(plus, cnt + 1));
+		q.push(make_pair(mul, cnt + 1));
 	}
 
 	cout << -1;
