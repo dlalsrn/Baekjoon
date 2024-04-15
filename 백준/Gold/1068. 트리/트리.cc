@@ -14,8 +14,7 @@ void DFS(int n)
 		return;
 	}
 	for (int x : node[n])
-		if (x != del) 
-			DFS(x);
+		DFS(x);
 }
 
 int main(void)
