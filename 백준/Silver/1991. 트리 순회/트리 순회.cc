@@ -1,61 +1,53 @@
-#include <iostream>
-#include <vector>
+// 트리 순회
+// 23.05.08
+#include <bits/stdc++.h>
 using namespace std;
 
-vector <int> node[26];
+vector <pair<char, char>> node;
 int N;
 char a, b, c;
 
-void pre(int n)
+void pre(char n)
 {
-	cout << (char)(n + 'A');
-	if (node[n][0] != -1)
-		pre(node[n][0]);
-	if (node[n][1] != -1)
-		pre(node[n][1]);
+	cout << n;
+	if (node[n].first != -1) pre(node[n].first);
+	if (node[n].second != -1) pre(node[n].second);
 }
 
-void in(int n)
+void in(char n)
 {
-	if (node[n][0] != -1)
-		in(node[n][0]);
-	cout << (char)(n + 'A');
-	if (node[n][1] != -1)
-		in(node[n][1]);
+	if (node[n].first != -1) in(node[n].first);
+	cout << n;
+	if (node[n].second != -1) in(node[n].second);
 }
 
-void post(int n)
+void post(char n)
 {
-	if (node[n][0] != -1)
-		post(node[n][0]);
-	if (node[n][1] != -1)
-		post(node[n][1]);
-	cout << (char)(n + 'A');
+	if (node[n].first != -1) post(node[n].first);
+	if (node[n].second != -1) post(node[n].second);
+	cout << n;
 }
 
 int main(void)
 {
 	cin.tie(0)->sync_with_stdio(false);
+
 	cin >> N;
+
+	node.resize(100, { -1, -1 });
 
 	for (int i = 0; i < N; i++)
 	{
 		cin >> a >> b >> c;
-		if (b != '.')
-			node[a - 'A'].push_back(b - 'A');
-		else
-			node[a - 'A'].push_back(-1);
-		if (c != '.')
-			node[a - 'A'].push_back(c - 'A');
-		else
-			node[a - 'A'].push_back(-1);
+		if (b != '.') node[a].first = b;
+		if (c != '.') node[a].second = c;
 	}
 
-	pre(0);
+	pre('A');
 	cout << '\n';
-	in(0);
+	in('A');
 	cout << '\n';
-	post(0);
+	post('A');
 
 	return 0;
 }

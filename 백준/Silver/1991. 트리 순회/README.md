@@ -10,6 +10,10 @@
 
 재귀, 트리
 
+### 제출 일자
+
+2024년 4월 15일 18:30:28
+
 ### 문제 설명
 
 <p>이진 트리를 입력받아 전위 순회(preorder traversal), 중위 순회(inorder traversal), 후위 순회(postorder traversal)한 결과를 출력하는 프로그램을 작성하시오.</p>
