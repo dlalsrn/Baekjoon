@@ -1,3 +1,6 @@
+// 나무 재테크
+// 24.04.17
+// 구현, 시뮬레이션
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -5,7 +8,7 @@ int N, M, K, x, y, z, ans = 0;
 int dx[8] = { 1, 1, -1, -1, 1, 0, -1, 0 };
 int dy[8] = { 1, -1, 1, -1, 0, 1, 0, -1 };
 vector <vector<int>> value, m;
-vector <vector<vector<int>>> node;
+vector <vector<deque<int>>> node;
 
 int main(void)
 {
@@ -15,7 +18,7 @@ int main(void)
 
 	value = vector<vector<int>>(N, vector<int>(N));
 	m = vector<vector<int>>(N, vector<int>(N, 5));
-	node = vector<vector<vector<int>>>(N, vector<vector<int>>(N));
+	node = vector<vector<deque<int>>>(N, vector<deque<int>>(N));
 
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
@@ -33,8 +36,6 @@ int main(void)
 		{
 			for (int j = 0; j < N; j++)
 			{
-				sort(node[i][j].begin(), node[i][j].end());
-
 				for (int r = 0; r < node[i][j].size(); r++)
 				{
 					if (m[i][j] >= node[i][j][r]) // 남는 양분이 더 많으면
@@ -70,7 +71,7 @@ int main(void)
 							
 							if (yy < 0 || yy >= N || xx < 0 || xx >= N) continue;
 
-							node[yy][xx].push_back(1);
+							node[yy][xx].push_front(1);
 						}
 					}
 				}
