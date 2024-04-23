@@ -1,3 +1,6 @@
+#pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -15,8 +18,12 @@ int main(void)
 	v.resize(N);
 	bucket.resize(N / S + 1);
 
-	for (int i = 0; i < N; i++) cin >> v[i];
-	for (int i = 0; i < N; i++) bucket[i / S].push_back(v[i]);
+	for (int i = 0; i < N; i++)
+	{
+		cin >> v[i];
+		bucket[i / S].push_back(v[i]);
+	}
+
 	for (int i = 0; i < N / S + 1; i++) sort(bucket[i].begin(), bucket[i].end());
 
 	cin >> M;
@@ -25,30 +32,29 @@ int main(void)
 	{
 		cin >> ch >> a >> b;
 		a--;
+		int s = a / S + 1;
 
 		if (ch == 1)
 		{
 			b--;
 			cin >> c;
 			cnt = 0;
+			int e = b / S;
 
-			while (a % S != 0 && a <= b) cnt += (v[a++] > c ? 1 : 0);
-			while ((b + 1) % S != 0 && a <= b) cnt += (v[b--] > c ? 1 : 0);
+			for (int k = a; k <= min(b, s * S - 1); k++) cnt += (v[k] > c ? 1 : 0);
+			a = min(b, s * S - 1) + 1;
+			for (int k = b; k >= max(a, e * S); k--) cnt += (v[k] > c ? 1 : 0);
+			for (int k = s; k < e; k++) cnt += (bucket[k].end() - upper_bound(bucket[k].begin(), bucket[k].end(), c));
 
-			while (a <= b)
-			{
-				cnt += (bucket[a/S].end() -upper_bound(bucket[a / S].begin(), bucket[a / S].end(), c));
-				a += S;
-			}
-			
 			cout << cnt << '\n';
 		}
 		else
 		{
-			auto i = lower_bound(bucket[a / S].begin(), bucket[a / S].end(), v[a]);
+			s--;
+			auto i = lower_bound(bucket[s].begin(), bucket[s].end(), v[a]);
 			v[a] = b;
 			*i = b;
-			sort(bucket[a / S].begin(), bucket[a / S].end());
+			sort(bucket[s].begin(), bucket[s].end());
 		}
 	}
 
