@@ -42,8 +42,7 @@ int main(void)
 			int e = b / S;
 
 			for (int k = a; k <= min(b, s * S - 1); k++) cnt += (v[k] > c ? 1 : 0);
-			a = min(b, s * S - 1) + 1;
-			for (int k = b; k >= max(a, e * S); k--) cnt += (v[k] > c ? 1 : 0);
+			for (int k = b; k >= max(s * S, e * S); k--) cnt += (v[k] > c ? 1 : 0);
 			for (int k = s; k < e; k++) cnt += (bucket[k].end() - upper_bound(bucket[k].begin(), bucket[k].end(), c));
 
 			cout << cnt << '\n';
