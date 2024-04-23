@@ -5,7 +5,7 @@
 using namespace std;
 
 int N, M, S, ch, a, b, c, cnt;
-int v[100001] = {};
+vector <int> v;
 vector <vector<int>> bucket;
 
 int main(void)
@@ -14,7 +14,8 @@ int main(void)
 
 	cin >> N;
 
-	S = sqrt(N);
+	S = 1000;
+	v.resize(N);
 	bucket.resize(N / S + 1);
 
 	for (int i = 0; i < N; i++)
