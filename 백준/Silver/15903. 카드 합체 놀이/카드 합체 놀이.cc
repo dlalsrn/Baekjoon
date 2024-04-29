@@ -1,11 +1,9 @@
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 
 priority_queue <ll, vector<ll>, greater<ll>> pq;
-ll x;
-int N, M;
+ll N, M, x, sum = 0;
 
 int main(void)
 {
@@ -27,15 +25,13 @@ int main(void)
 		pq.push(a + b);
 	}
 
-	x = 0;
-
 	while (!pq.empty())
 	{
-		x += pq.top();
+		sum += pq.top();
 		pq.pop();
 	}
 
-	cout << x;
+	cout << sum;
 
 	return 0;
 }
