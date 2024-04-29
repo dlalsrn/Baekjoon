@@ -1,30 +1,27 @@
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
+using pi = pair<int, int>;
 
-priority_queue <pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q;
+priority_queue <pi, vector<pi>, greater<pi>> pq;
 int N, x;
 
 int main(void)
 {
 	cin.tie(0)->sync_with_stdio(false);
-	cout.tie(0);
 
 	cin >> N;
 
 	for (int i = 0; i < N; i++)
 	{
 		cin >> x;
-		if (x)
-			q.push(make_pair(abs(x), x));
+		if (x) pq.push(make_pair(abs(x), x));
 		else
 		{
-			if (q.empty())
-				cout << "0\n";
+			if (pq.empty()) cout << "0\n";
 			else
 			{
-				cout << q.top().second << '\n';
-				q.pop();
+				cout << pq.top().second << '\n';
+				pq.pop();
 			}
 		}
 	}
