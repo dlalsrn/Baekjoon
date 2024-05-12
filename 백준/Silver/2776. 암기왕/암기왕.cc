@@ -2,7 +2,7 @@
 using namespace std;
 
 int T, N, M, x;
-set <int> s;
+vector <int> v;
 
 int main(void)
 {
@@ -13,21 +13,25 @@ int main(void)
 	for (int t = 0; t < T; t++)
 	{
 		cin >> N;
-		s.clear();
+		v = vector<int>();
 
 		for (int i = 0; i < N; i++)
 		{
 			cin >> x;
-			s.insert(x);
+			v.push_back(x);
 		}
+
+		sort(v.begin(), v.end());
 
 		cin >> M;
 
 		for (int i = 0; i < M; i++)
 		{
 			cin >> x;
-			
-			cout << (s.find(x) != s.end() ? 1 : 0) << '\n';
+
+			int j = lower_bound(v.begin(), v.end(), x) - v.begin();
+
+			cout << (j != N && v[j] == x ? 1 : 0) << '\n';
 		}
 	}
 
