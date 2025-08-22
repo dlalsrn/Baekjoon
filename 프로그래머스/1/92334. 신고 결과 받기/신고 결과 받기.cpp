@@ -1,26 +1,33 @@
 #include <bits/stdc++.h>
-#define fastio cin.tie(0)->sync_with_stdio(0)
+#include <unordered_set>
 using namespace std;
 
-vector<int> solution(vector<string> id_list, vector<string> report, int k) {
-    // 1.
-    const int n = id_list.size();
-    map<string, int> Conv;
-    for (int i = 0; i < n; i++) Conv[id_list[i]] = i;
+vector<int> solution(vector<string> id_list, vector<string> report, int k)
+{
+    vector<int> answer;
+    unordered_map<string, unordered_set<string>> reporting; // 신고한 목록
+    unordered_map<string, unordered_set<string>> reported; // 신고당한 목록
 
-    // 2.
-    vector<pair<int, int>> v;
-    sort(report.begin(), report.end());
-    report.erase(unique(report.begin(), report.end()), report.end());
-    for (const auto& s : report) {
-        stringstream in(s);
-        string a, b; in >> a >> b;
-        v.push_back({ Conv[a], Conv[b] });
+    for (int i = 0; i < report.size(); i++)
+    {
+        istringstream iss(report[i]);
+        string userId, reportId;
+        iss >> userId >> reportId;
+
+        reporting[userId].insert(reportId); // userId가 reportId를 신고 함
+        reported[reportId].insert(userId); // reportId가 userId한테 신고 당함
     }
 
-    // 3.
-    vector<int> cnt(n), ret(n);
-    for (const auto& [a, b] : v) cnt[b]++;
-    for (const auto& [a, b] : v) if (cnt[b] >= k) ret[a]++;
-    return ret;
+    for (int i = 0; i < id_list.size(); i++)
+    {
+        int cnt = 0;
+        string userId = id_list[i];
+        
+        for (const string& reportId : reporting[userId])
+            if (reported[reportId].size() >= k) cnt++;
+
+        answer.push_back(cnt);
+    }
+
+    return answer;
 }
