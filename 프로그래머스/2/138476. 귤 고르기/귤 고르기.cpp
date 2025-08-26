@@ -1,48 +1,19 @@
-#include <string>
-#include <vector>
-#include <utility>
-#include <algorithm>
+#include <bits/stdc++.h>
+
 using namespace std;
-using pi = pair<int, int>;
 
-int solution(int k, vector<int> tangerine)
-{
+int solution(int k, vector<int> tangerine) {
     int answer = 0;
-    vector<int> v;
-
-    sort(tangerine.begin(), tangerine.end());
-    int cnt = 1;
-    int n = tangerine[0];
-
-    for (int i = 1; i < tangerine.size(); i++)
-    {
-        if (n == tangerine[i])
-        {
-            cnt++;
-        }
-        else
-        {
-            v.push_back(cnt);
-            cnt = 1;
-            n = tangerine[i];
-        }
+    int m = *max_element(tangerine.begin(), tangerine.end());
+    vector<int> v(m, 0);
+    for(auto& t : tangerine){
+        v[t - 1]++;
     }
-
-    v.push_back(cnt);
-
-    sort(v.begin(), v.end(), greater<>());
-
-    cnt = 0;
-    for (int i = 0; i < v.size(); i++)
-    {
-        cnt += v[i];
-
-        if (cnt >= k)
-        {
-            answer = i + 1;
-            break;
-        }
+    stable_sort(v.rbegin(), v.rend());
+    for(int i = 0 ; i < v.size() ; i++){
+        answer++;
+        k -= v[i];
+        if(k <= 0) return answer;
     }
-
     return answer;
 }
