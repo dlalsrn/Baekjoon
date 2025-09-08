@@ -21,7 +21,7 @@ int solution(vector<int> queue1, vector<int> queue2)
         q2.push(queue2[i]);
     }
 
-    for (int i = 0; i < queue1.size() * 4 + 1; i++)
+    for (int i = 0; i < queue1.size() * 3 + 1; i++)
     {
         if (sum1 < sum2)
         {
