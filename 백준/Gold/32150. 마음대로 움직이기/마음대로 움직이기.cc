@@ -2,10 +2,11 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
+using ll = long long;
 
-int N, Q, T, P;
-int L, R;
-vector<int> v;
+ll N, Q, T, P;
+ll L, R;
+vector<ll> v;
 
 int main(void)
 {
@@ -14,7 +15,7 @@ int main(void)
 	cin >> N;
 	for (int i = 0; i < N; ++i)
 	{
-		int x;
+		ll x;
 		cin >> x;
 		v.emplace_back(x);
 	}
@@ -26,7 +27,12 @@ int main(void)
 	{
 		cin >> T >> P;
 
-		int cnt = 0;
+		if (v.empty())
+		{
+			cout << T + 1 << '\n';
+			continue;
+		}
+
 		auto it = lower_bound(v.begin(), v.end(), P);
 
 		if (it == v.begin())
@@ -45,12 +51,13 @@ int main(void)
 			R = min(P + T, *it - 1);
 		}
 
-		long long ans = 0;
+		ll ans = 0;
 
 		if (L <= R)
 		{
-			long long first = L;
-			if ((first - (P + T)) % 2 != 0) first++;
+			ll first = L;
+
+			if(((first - P) & 1) != (T & 1)) first++;
 
 			if (first <= R) ans = (R - first) / 2 + 1;
 		}
